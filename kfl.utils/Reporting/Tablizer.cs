@@ -7,7 +7,7 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
-    public class Tablizer
+    public static class Tablizer
     {
         private static readonly ConcurrentDictionary<Type, TypeInfo[]> TypeRegister = new ConcurrentDictionary<Type, TypeInfo[]>();
 
@@ -54,6 +54,14 @@
                 .SetHeaders(info.Select(getHeader).ToArray())
                 .SetColumns(info.Select(_ => (Func<T, object>)(t => _.Getter(t))).ToArray());
             return formatter.Format(objs);
+        }
+
+        public static void Tablize<T>(this IEnumerable<T> objs, Action<string> print, params string[] columeOptions)
+        {
+            foreach (var line in Tablize(objs, columeOptions))
+            {
+                if (print != null) print(line);
+            }
         }
 
         class TypeInfo
