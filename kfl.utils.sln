@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kfl.utils", "kfl.utils\kfl.utils.csproj", "{72120D6E-6799-4190-9CCA-1FBFC5034D1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{DA8527C9-FFA2-416B-903A-CC60A5E4A239}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72120D6E-6799-4190-9CCA-1FBFC5034D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72120D6E-6799-4190-9CCA-1FBFC5034D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72120D6E-6799-4190-9CCA-1FBFC5034D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72120D6E-6799-4190-9CCA-1FBFC5034D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8527C9-FFA2-416B-903A-CC60A5E4A239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8527C9-FFA2-416B-903A-CC60A5E4A239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8527C9-FFA2-416B-903A-CC60A5E4A239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8527C9-FFA2-416B-903A-CC60A5E4A239}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
