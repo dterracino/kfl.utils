@@ -1,12 +1,11 @@
-﻿namespace kfl.utils
+﻿namespace Kfl.Utils.Reporting
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
-    using System.Reflection;
     using System.Linq.Expressions;
-    using System.Collections.Concurrent;
+    using System.Reflection;
 
     public class Tablizer
     {

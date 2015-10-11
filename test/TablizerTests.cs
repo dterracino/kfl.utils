@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using System.Diagnostics;
-using kfl.utils;
-using Xunit.Abstractions;
-
-namespace test
+﻿namespace test
 {
+    using Kfl.Utils.Reporting;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Xunit;
+    using Xunit.Abstractions;
+
     public class TablizerTests
     {
         private ITestOutputHelper output;
