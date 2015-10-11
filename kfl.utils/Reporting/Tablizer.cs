@@ -126,7 +126,7 @@
                         Getters.Select(_ => _(current).ToString().Length),
                         max).ToArray());
 
-                string template = string.Join("", Enumerable.Range(0, widths.Length).Select(i => string.Format("{{{0},{2}{1}}}", i, (int)(widths[i] * 2), Alignments[i])));
+                string template = string.Join("", Enumerable.Range(0, widths.Length).Select(i => string.Format("{{{0},{2}{1}}}", i, (int)(widths[i] * 1.2), Alignments[i])));
 
                 yield return string.Format(template, Names);
                 foreach (var obj in cached)

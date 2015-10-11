@@ -17,5 +17,26 @@ namespace Kfl.Utils.Functional
         {
             return x.CompareTo(y) > 0 ? x : y;
         }
+
+        /// <summary>
+        /// Useful to make things fluent
+        /// </summary>
+        /// <remarks>
+        /// <![CDATA[
+        /// This code:
+        /// 
+        ///     var thing = new Thing();
+        ///     thing.Config.X = 1;
+        ///     
+        /// becomes:
+        /// 
+        ///     var thing = new Thing().With(_ => _.Config.X = 1);
+        /// ]]>
+        /// </remarks>
+        public static T With<T>(this T obj, Action<T> action)
+        {
+            action(obj);
+            return obj;
+        }
     }
 }
