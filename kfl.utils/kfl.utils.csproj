@@ -7,7 +7,7 @@
     <ProjectGuid>{72120D6E-6799-4190-9CCA-1FBFC5034D1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>kfl.utils</RootNamespace>
+    <RootNamespace>Kfl.Utils</RootNamespace>
     <AssemblyName>kfl.utils</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -40,9 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Progress.cs" />
+    <Compile Include="Functional\Functional.cs" />
+    <Compile Include="Reporting\Progress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tablizer.cs" />
+    <Compile Include="Reporting\Tablizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

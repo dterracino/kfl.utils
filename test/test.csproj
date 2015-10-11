@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FunctionalTests.cs" />
     <Compile Include="ProgressTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TablizerTests.cs" />
