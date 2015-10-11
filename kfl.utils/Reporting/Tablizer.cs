@@ -118,12 +118,13 @@
 
             public IEnumerable<string> Format(IEnumerable<T> input)
             {
+                Func<object, string> toStringOrEmpty = _ => _?.ToString() ?? string.Empty;
                 var cached = input.ToList();
                 int[] widths = cached.Aggregate(
                     Names.Select(_ => _.Length).ToArray(), // seed
                     (accu, current) => Enumerable.Zip(
                         accu,
-                        Getters.Select(_ => _(current).ToString().Length),
+                        Getters.Select(_ => toStringOrEmpty(_(current)).Length),
                         max).ToArray());
 
                 string template = string.Join("", Enumerable.Range(0, widths.Length).Select(i => string.Format("{{{0},{2}{1}}}", i, (int)(widths[i] * 1.2), Alignments[i])));
