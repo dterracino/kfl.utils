@@ -1,6 +1,7 @@
 ﻿namespace Kfl.Utils.Reporting
 {
     using System;
+    using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
@@ -11,12 +12,12 @@
     {
         private static readonly ConcurrentDictionary<Type, TypeInfo[]> TypeRegister = new ConcurrentDictionary<Type, TypeInfo[]>();
 
-        private static TypeInfo[] GetOrRegister<T>()
+        private static TypeInfo[] GetOrRegister(Type type)
         {
             TypeInfo[] info;
-            if (TypeRegister.TryGetValue(typeof(T), out info)) return info;
+            if (TypeRegister.TryGetValue(type, out info)) return info;
 
-            MemberInfo[] members = typeof(T).GetMembers(System.Reflection.BindingFlags.Public
+            MemberInfo[] members = type.GetMembers(System.Reflection.BindingFlags.Public
                 | System.Reflection.BindingFlags.Instance
                 | System.Reflection.BindingFlags.GetField
                 | System.Reflection.BindingFlags.GetProperty)
@@ -24,7 +25,7 @@
                 .ToArray();
 
             var para = Expression.Parameter(typeof(object), "obj");
-            var typed = Expression.Convert(para, typeof(T));
+            var typed = Expression.Convert(para, type);
 
             Func<MemberInfo, Func<object, object>> getGetter = m => Expression.Lambda<Func<object, object>>(
                 Expression.Convert(
@@ -33,7 +34,7 @@
                 para).Compile();
 
             info = members.Select(m => new TypeInfo { Name = m.Name, Getter = getGetter(m) }).ToArray();
-            TypeRegister.TryAdd(typeof(T), info);
+            TypeRegister.TryAdd(type, info);
             return info;
         }
 
@@ -46,14 +47,19 @@
         /// <returns></returns>
         public static IEnumerable<string> Tablize<T>(IEnumerable<T> objs, params string[] columeOptions)
         {
-            var info = GetOrRegister<T>();
+            return Tablize(objs, typeof(T), columeOptions);
+        }
+
+        public static IEnumerable<string> Tablize(IEnumerable objs, Type type, params string[] columeOptions)
+        {
+            var info = GetOrRegister(type);
 
             // TODO: TypeRegister can cache a TableFormatter. But need to make a base non-generic TableFormatter
             Func<TypeInfo, string> getHeader = _ => columeOptions.FirstOrDefault(opt => opt.StartsWith(_.Name)) ?? _.Name;
-            var formatter = new TableFormatter<T>()
+            var formatter = new TableFormatter<object>()
                 .SetHeaders(info.Select(getHeader).ToArray())
-                .SetColumns(info.Select(_ => (Func<T, object>)(t => _.Getter(t))).ToArray());
-            return formatter.Format(objs);
+                .SetColumns(info.Select(_ => _.Getter).ToArray());
+            return formatter.Format(objs.OfType<object>());
         }
 
         public static void Tablize<T>(this IEnumerable<T> objs, Action<string> print, params string[] columeOptions)
