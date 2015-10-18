@@ -70,6 +70,14 @@
             }
         }
 
+        public static void Tablize(this IEnumerable objs, Type type, Action<string> print, params string[] columeOptions)
+        {
+            foreach (var line in Tablize(objs, type, columeOptions))
+            {
+                if (print != null) print(line);
+            }
+        }
+
         class TypeInfo
         {
             public string Name;
